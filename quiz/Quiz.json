@@ -1,0 +1,59 @@
+{
+    "questions": [
+        {
+            "text": "W którym roku miała miejsce bitwa pod Poitiers?",
+            "answer": 732,
+            "penalty": 30
+        },
+        {
+            "text": "W którym roku podpisano traktat z Verdun, skutkujący rozpadem państwa Franków?",
+            "answer": 843,
+            "penalty": 30
+        },
+        {
+            "text": "W którym roku katedra w Lincoln stała się najwyższą budowlą na świecie, przewyższając piramidę Cheopsa?",
+            "answer": 1311,
+            "penalty": 70
+        },
+        {
+            "text": "W którym roku miała miejsce Hidżra, ucieczka Mahometa z Mekki do Medyny?",
+            "answer": 622,
+            "penalty": 20
+        },
+        {
+            "text": "W którym roku szlachta polska i litewska podpisały unię w Horodle?",
+            "answer": 1413,
+            "penalty": 50
+        },
+        {
+            "text": "W którym roku, według większości historyków, wielki książę kijowski Włodzimierz przyjął chrzest?",
+            "answer": 988,
+            "penalty": 65
+        },
+        {
+            "text": "W którym roku zakończyła się I wyprawa krzyżowa?",
+            "answer": 1097,
+            "penalty": 40
+        },
+        {
+            "text": "W którym roku powstał słynny zegar astronomiczny w Pradze, działający do dziś?",
+            "answer": 1410,
+            "penalty": 40
+        },
+        {
+            "text": "W którym roku powstał Uniwersytet Boloński?",
+            "answer": 1088,
+            "penalty": 25
+        },
+        {
+            "text": "W którym roku król Anglii Jan bez Ziemi wydał Wielką Kartę Swobód?",
+            "answer": 1215,
+            "penalty": 25
+        },
+        {
+            "text": "W którym roku papież Grzegorz XI, przeniósł się do Rzymu, zakończywszy niewolę awiniońską?",
+            "answer": 1377,
+            "penalty": 40
+        }
+    ]
+}

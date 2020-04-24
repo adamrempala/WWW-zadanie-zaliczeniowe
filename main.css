@@ -1,0 +1,77 @@
+@media screen and (min-width: 750px) {
+    #start {
+        width: 240px;
+        height: 150px;
+    }
+    article p, #start p {
+        font-size: 20px;
+    }
+    
+}
+
+@media screen and (max-width: 750px) {
+    #start {
+        width: 120px;
+        height: 75px;
+    }
+    article p, #start p {
+        font-size: 10px;
+    }
+    
+}
+
+body {
+    width: auto;
+    background-image: url(resources/background2.jpeg);
+    font-family: 'MedievalSharp', cursive;
+}
+
+header {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
+img {
+
+    width: 80%;
+    height: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+article {
+    height: auto;
+    margin: auto;
+    width: 80%;
+}
+
+article p {
+    text-align: justify;
+}
+
+#start {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: red;
+    position: relative;
+    border-radius: 10%;
+    
+
+}
+
+#start:hover {
+    background-color: #ec6d6d;
+    cursor: pointer;
+}
+
+#start p {
+    margin:0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}

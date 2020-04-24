@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="reset.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+        <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet"> 
+        
+    </head>
+
+    <body>
+        <header>
+            <img src='../resources/header.png' alt='Średniowieczny quiz'>
+        </header>
+        <main>
+            <div id="score">
+                <p id="seconds"></p>
+                <table id="replies">
+                    <tr>
+                        <th scope="col">Numer pytania</th>
+                        <th scope="col">Twoja odpowiedź</th>
+                        <th scope="col">Poprawna odpowiedź</th>
+                        <th scope="col">Spędzony czas</th>
+                        <th scope="col">Kara za pytanie</th>
+                    </tr>
+                    
+                </table>
+                <p>Zapisz swój wynik</p>
+                <input type="text" id="nick">
+                <input type="button" id="save" value="Save with stats">
+                <input type="button" id="savens" value="Save without stats">
+                <input type="button" id="dontsave" onclick="location.href='./cancelled.html'" value="Return without saving">
+                
+            </div>
+            <article>
+                <p>Twoim zadaniem będzie skojarzyć podane wydarzenia historyczne z okresu średniowiecza
+                    do lat, w których miały one miejsce. Możesz swobodnie przełączać się między pytaniami,
+                    ale na każde pytanie musisz udzielić odpowiedzi. Pamiętaj – musisz to zrobić jak najszybciej,
+                    a błędna odpowiedź skutkuje karą czasową!
+                </p>
+            </article>
+            <div id="game">
+                <p id ="gamehead">Pytanie nr 1</p>
+                <p id ="questiontext"></p>
+                <p id ="penaltytext"></p>
+                <p id ="timer">0</p>
+
+                <input type="number" id="answer" min = 476 max= 1550>
+                <input type="button" id="back" onclick=clickBack() value="Wstecz">
+                <input type="button" id="forward" onclick=clickForward() value="Dalej">
+                <input type="button" id="stop" value="Stop" disabled>
+                <input type="button" id="cancel" onclick="location.href='./cancelled.html'" value="Anuluj">
+            </div>
+            
+        </main>
+    </body>
+    <script type="text/javascript" src="main.js"></script>
+</html>
