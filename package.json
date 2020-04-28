@@ -1,0 +1,24 @@
+{
+  "name": "www-zadanie-zaliczeniowe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc --lib ES2016,dom"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamrempala/WWW-zadanie-zaliczeniowe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamrempala/WWW-zadanie-zaliczeniowe/issues"
+  },
+  "homepage": "https://github.com/adamrempala/WWW-zadanie-zaliczeniowe#readme",
+  "dependencies": {
+    "typescript": "^3.8.3"
+  }
+}

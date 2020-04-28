@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Średniowieczny Quiz</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="reset.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+        <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet"> 
+    </head>
+
+    <body>
+        <header>
+            <img src='resources/header.png' alt='Średniowieczny quiz'>
+        </header>
+        <main>
+            <div id="score">
+                <p id="seconds"></p>
+                <table id="replies">
+                    <tr>
+                        <th scope="col">Nr</th>
+                        <th scope="col">Pytanie</th>
+                        <th scope="col">Odp.</th>
+                        <th scope="col">Popr.</th>
+                        <th scope="col">Czas</th>
+                        <th scope="col">Kara</th>
+                    </tr>
+                    
+                </table>
+                <p id="encourage">Zapisz swój wynik</p>
+                <input type="text" id="nick">
+                <input type="button" class="navbutton2" id="save" value="Zapisz ze statystykami">
+                <input type="button" class="navbutton2" id="savens" value="Zapisz bez statystyk">
+                <input type="button" class="navbutton2" id="dontsave" onclick="location.reload()" value="Wyjdź bez zapisywania">
+                
+            </div>
+            <article>
+                <p>Twoim zadaniem będzie skojarzyć podane wydarzenia historyczne z okresu średniowiecza
+                    z latami, w których miały one miejsce. Możesz swobodnie przełączać się między pytaniami,
+                    ale na każde pytanie musisz udzielić odpowiedzi. Pamiętaj – musisz to zrobić jak najszybciej,
+                    a błędna odpowiedź skutkuje karą czasową!
+                </p>
+            </article>
+            <div id="game">
+                <p id ="gamehead">Pytanie nr 1</p>
+                <p id ="timer">0</p>
+                <p id ="questiontext"></p>
+                <p id ="penaltytext"></p>
+                <input type="button" class="navbutton" id="cancel" onclick="location.reload()" value="Anuluj">
+                <input type="button" class="navbutton" id="back" onclick=clickBack() value="Wstecz">
+            
+                <input type="button" class="navbutton" id="forward" onclick=clickForward() value="Dalej">
+                <input type="button" class="navbutton" id="stop" value="Stop" disabled>
+
+                <input type="number" id="answer" min = 476 max= 1550>
+                <img id="image" src='img/1.jpeg' alt='Image of question'>
+                <div id="questions"></div>
+            </div>
+            <div id="startpage">
+                <div id="start">
+                    <p>Zaczynam!</p>
+                </div>
+                <div id="stats">
+                    <p>Top 5 w tej przeglądarce</p>
+                    <table id="best">
+                        <tr>
+                            <th scope="col">Miejsce</th>
+                            <th scope="col">Nick</th>
+                            <th scope="col">Czas</th>
+                        </tr>
+                    </table>
+                    <input type="button" class="navbutton2" value="Resetuj">
+                </div>
+            </div>
+        </main>
+        <script src="main.js"></script>
+    </body>
+
+</html>
