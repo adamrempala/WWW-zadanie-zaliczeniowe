@@ -124,13 +124,13 @@ img {
     width: auto;
 }
 
-article {
+#description {
     height: auto;
     margin: auto;
     width: 80%;
 }
 
-article p {
+#description p {
     text-align: justify;
 }
 
@@ -382,7 +382,7 @@ article p {
 }
 
 @media screen and (max-width: 750px) {
-    article p {
+    #description p {
         font-size: 15px;
     }
 

@@ -404,7 +404,7 @@ document.getElementById('start').addEventListener('click', () => {
     // koniec gry
     stopbut.addEventListener('click', () => {
         let tabela = document.getElementById("replies") as HTMLTableElement;
-        let article = document.querySelector('article');
+        let article = document.getElementById("description");
         let seconds = document.getElementById("seconds");
 
         ender = false; // czas stop
