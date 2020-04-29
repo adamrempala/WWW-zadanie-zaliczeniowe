@@ -461,7 +461,7 @@ document.getElementById('start').addEventListener('click', () => {
 
         article.style.display = 'none';
         seconds.innerHTML = `Twój wynik to ${time.toFixed(1)}s`;
-        document.title = `Game finished!`
+        document.title = `Gra zakończona!`
 
         // teraz można zapisać wynik pod swoim nickiem
         nick.addEventListener('change', checkNick);
