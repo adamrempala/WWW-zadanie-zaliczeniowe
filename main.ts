@@ -1,4 +1,3 @@
-// Z https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array#6274398
 function shuffle(array) {
     let counter = array.length;
 
@@ -19,8 +18,7 @@ function shuffle(array) {
     return array;
 }
 
-// treść quizu
-let quiz =
+const quizcont =
     [
         {
             "id": 1,
@@ -101,17 +99,32 @@ let quiz =
         }
     ];
 
-quiz = shuffle(quiz); // tasujemy pytania
+let quiz = shuffle(quizcont); // tasujemy pytania
 
-// nazwy selektorów odpowiadają nazwom id elementów
-let answer = document.querySelector('#answer') as HTMLInputElement;
-let game = document.getElementById("game") as HTMLDivElement;
-let score = document.getElementById("score") as HTMLDivElement;
-let startpage = document.getElementById("startpage") as HTMLDivElement;
-let stats = document.getElementById("stats") as HTMLDivElement;
-let start = document.getElementById("start") as HTMLDivElement;
-let tabela = document.getElementById('best') as HTMLTableElement;
-let nick = document.getElementById('nick') as HTMLInputElement;
+/*** SELEKTORY ***/
+const answer = document.querySelector('#answer') as HTMLInputElement;
+const back = document.getElementById("back") as HTMLButtonElement;
+const description = document.getElementById("description") as HTMLDivElement;
+const forward = document.getElementById("forward") as HTMLButtonElement;
+const game = document.getElementById("game") as HTMLDivElement;
+const gamehead = document.getElementById("gamehead") as HTMLParagraphElement;
+const image = document.getElementById('image') as HTMLImageElement;
+const nick = document.getElementById('nick') as HTMLInputElement;
+const penaltytext = document.getElementById("penaltytext") as HTMLParagraphElement;
+const questions = document.querySelector('#questions') as HTMLDivElement;
+const questiontext = document.getElementById("questiontext") as HTMLParagraphElement;
+const replies = document.getElementById("replies") as HTMLTableElement;
+const resetuj = document.querySelector('input[value="Resetuj"]') as HTMLInputElement;
+const save = document.getElementById("save") as HTMLParagraphElement;
+const savens = document.getElementById("savens") as HTMLParagraphElement;
+const score = document.getElementById("score") as HTMLDivElement;
+const seconds = document.getElementById("seconds") as HTMLParagraphElement;
+const start = document.getElementById("start") as HTMLDivElement;
+const startpage = document.getElementById("startpage") as HTMLDivElement;
+const stopbut = document.querySelector('#stop') as HTMLInputElement;
+const tabela = document.getElementById('best') as HTMLTableElement;
+const timer = document.getElementById("timer") as HTMLParagraphElement;
+
 
 
 let answers = []; // tablica, do której zbieramy odpowiedzi użytkownika
@@ -185,17 +198,17 @@ function loadPage(pageNo) {
     currentQuestion = pageNo;
 
     // aktualizacja informacji dot. pytania
-    document.getElementById("gamehead").innerHTML = `Pytanie nr ${pageNo + 1}`;
-    document.getElementById("questiontext").innerHTML = quiz[pageNo].text;
-    document.getElementById("penaltytext").innerHTML = `Błąd: +${quiz[pageNo].penalty} sekund`;
-    (<HTMLImageElement>document.getElementById("image")).setAttribute('src', `${quiz[pageNo].image}`);
+    gamehead.innerHTML = `Pytanie nr ${pageNo + 1}`;
+    questiontext.innerHTML = quiz[pageNo].text;
+    penaltytext.innerHTML = `Błąd: +${quiz[pageNo].penalty} sekund`;
+    image.setAttribute('src', `${quiz[pageNo].image}`);
     answer.value = answers[pageNo];
 
     // włączenie/wyłączenie odpowiednich przyciskóœ nawigacyjnych
-    if (pageNo === 0) document.getElementById("back").setAttribute('disabled', 'disabled');
-    else document.getElementById("back").removeAttribute('disabled');
-    if (pageNo === quiz.length - 1) document.getElementById("forward").setAttribute('disabled', 'disabled');
-    else document.getElementById("forward").removeAttribute('disabled');
+    if (pageNo === 0) back.setAttribute('disabled', 'disabled');
+    else back.removeAttribute('disabled');
+    if (pageNo === quiz.length - 1) forward.setAttribute('disabled', 'disabled');
+    else forward.removeAttribute('disabled');
 
     // chcemy, by po załadowaniu od razu można było wpisywać
     answer.focus();
@@ -213,12 +226,7 @@ function clickForward() {
 }
 
 // włączenie gry
-document.getElementById('start').addEventListener('click', () => {
-    let stopbut = document.querySelector('#stop') as HTMLInputElement;
-    let pytania = document.querySelector('#questions') as HTMLDivElement;
-    let score = document.getElementById("score");
-    let save = document.getElementById("save");
-    let savens = document.getElementById("savens");
+start.addEventListener('click', () => {
 
     // gra zaczyna być widoczna, powitanie przestaje
     game.style.display = '';
@@ -243,7 +251,7 @@ document.getElementById('start').addEventListener('click', () => {
         times.push(0);
 
         // dodanie do panelu przycisków pytań
-        pytania.innerHTML += `<div class='questionbutton' data-id='${i}'
+        questions.innerHTML += `<div class='questionbutton' data-id='${i}'
              onclick=loadPage(${i})><p>${i + 1}</p></div>\n`
         
         let quest = document.createElement('div');
@@ -281,7 +289,7 @@ document.getElementById('start').addEventListener('click', () => {
     // stoper (liczy do momentu, kiedy ustawimy zmienną przerwania na false)
     const countTime = async () => {
         while (ender === true) {
-            document.getElementById("timer").innerHTML = time.toFixed(1).toString();
+            timer.innerHTML = time.toFixed(1).toString();
             await sleep(100);
             time += 0.1;
             times[currentQuestion] += 0.1;
@@ -398,14 +406,11 @@ document.getElementById('start').addEventListener('click', () => {
     loadPage(0); // ładuję pierwsze pytanie
 
     // reaguję na kilknięcia i zmiany funkcją zapisującą
-    answer.addEventListener('keydown', saveAns);
+    answer.addEventListener('keyup', saveAns);
     answer.addEventListener('change', saveAns);
 
     // koniec gry
     stopbut.addEventListener('click', () => {
-        let tabela = document.getElementById("replies") as HTMLTableElement;
-        let article = document.getElementById("description");
-        let seconds = document.getElementById("seconds");
 
         ender = false; // czas stop
 
@@ -423,7 +428,7 @@ document.getElementById('start').addEventListener('click', () => {
             );
             
             // tworzenie tabeli
-            let wiersz = tabela.insertRow(i + 1);
+            let wiersz = replies.insertRow(i + 1);
             let cell1 = wiersz.insertCell(0);
             let cell2 = wiersz.insertCell(1);
             let cell3 = wiersz.insertCell(2);
@@ -459,7 +464,7 @@ document.getElementById('start').addEventListener('click', () => {
         score.style.display = '';
         game.style.display = 'none';
 
-        article.style.display = 'none';
+        description.style.display = 'none';
         seconds.innerHTML = `Twój wynik to ${time.toFixed(1)}s`;
         document.title = `Gra zakończona!`
 
@@ -479,7 +484,7 @@ document.getElementById('start').addEventListener('click', () => {
 });
 
 // resetowanie statystyk
-document.querySelector('input[value="Resetuj"]').addEventListener('click', () => {
+resetuj.addEventListener('click', () => {
     indexedDB.deleteDatabase('ReplyBase');
     location.reload();
 })
