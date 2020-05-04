@@ -18,6 +18,7 @@ function shuffle(array) {
     return array;
 }
 
+// treść quizu
 const quizcont =
     [
         {
@@ -245,8 +246,7 @@ start.addEventListener('click', () => {
         stats: []
     };
 
-    let i = 0;
-    while (i != quiz.length) {
+    for (let i=0; i != quiz.length; i++) {
         answers.push("");
         times.push(0);
 
@@ -255,7 +255,6 @@ start.addEventListener('click', () => {
              onclick=loadPage(${i})><p>${i + 1}</p></div>\n`
         
         let quest = document.createElement('div');
-        i++;
     }
 
     // spanie asynchroniczne (oczekiwanie odp. czasu)
@@ -268,7 +267,7 @@ start.addEventListener('click', () => {
         let i = 0;
         let j = 0;
 
-        while (i != answers.length) {
+        for (let i = 0; i != answers.length; i++) {
             let but = document.querySelector(
                 `.questionbutton[data-id='${i}']`
                 ) as HTMLDivElement;
@@ -280,7 +279,6 @@ start.addEventListener('click', () => {
             } else {
                 but.style.backgroundColor = 'orange';
             }
-            i++;
         }
 
         return j;
@@ -415,8 +413,7 @@ start.addEventListener('click', () => {
         ender = false; // czas stop
 
         // uzupełnienie statystyk
-        let i = 0;
-        while (i < answers.length) {
+        for (let i = 0; i < answers.length; i++) {
             gamelog.stats.push(
                 {
                     number: i + 1,
@@ -456,8 +453,6 @@ start.addEventListener('click', () => {
                 gamelog.stats[i].penalty = quiz[i].penalty.toFixed(1);
                 wiersz.style.color = 'red';
             }
-
-            i++;
         }
 
         gamelog.time = time;
