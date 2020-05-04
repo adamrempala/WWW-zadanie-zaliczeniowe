@@ -29,9 +29,10 @@
                 </table>
                 <p id="encourage">Zapisz swój wynik</p>
                 <input type="text" id="nick">
-                <input type="button" class="navbutton2" id="save" value="Zapisz ze statystykami">
-                <input type="button" class="navbutton2" id="savens" value="Zapisz bez statystyk">
-                <input type="button" class="navbutton2" id="dontsave" onclick="location.reload()" value="Wyjdź bez zapisywania">
+                <input type="button" class="bignavbut" id="save" value="Zapisz ze statystykami">
+                <input type="button" class="bignavbut" id="savens" value="Zapisz bez statystyk">
+                <input type="button" class="bignavbut" id="dontsave"
+                     onclick="location.reload()" value="Wyjdź bez zapisywania">
                 
             </div>
             <div id="description">
@@ -46,15 +47,15 @@
                 <p id ="timer">0</p>
                 <p id ="questiontext"></p>
                 <p id ="penaltytext"></p>
-                <input type="button" class="navbutton" id="cancel" onclick="location.reload()" value="Anuluj">
-                <input type="button" class="navbutton" id="back" onclick=clickBack() value="Wstecz">
+                <input type="button" class="litnavbut" id="cancel" onclick="location.reload()" value="Anuluj">
+                <input type="button" class="litnavbut" id="back" onclick=clickBack() value="Wstecz">
             
-                <input type="button" class="navbutton" id="forward" onclick=clickForward() value="Dalej">
-                <input type="button" class="navbutton" id="stop" value="Stop" disabled>
+                <input type="button" class="litnavbut" id="forward" onclick=clickForward() value="Dalej">
+                <input type="button" class="litnavbut" id="stop" value="Stop" disabled>
 
                 <input type="number" id="answer" min = 476 max= 1550>
                 <img id="image" src='img/1.jpeg' alt='Image of question'>
-                <div id="questions"></div>
+                <div id="panel"></div>
             </div>
             <div id="startpage">
                 <div id="start">
@@ -69,7 +70,7 @@
                             <th scope="col">Czas</th>
                         </tr>
                     </table>
-                    <input type="button" class="navbutton2" value="Resetuj">
+                    <input type="button" class="bignavbut" value="Resetuj">
                 </div>
             </div>
         </main>

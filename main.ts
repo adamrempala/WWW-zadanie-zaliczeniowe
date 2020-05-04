@@ -1,15 +1,15 @@
 function shuffle(array) {
     let counter = array.length;
 
-    // While there are elements in the array
+    //  Dopóki w tablicy coś jest
     while (counter > 0) {
-        // Pick a random index
+        // Biorę losowy indeks
         let index = Math.floor(Math.random() * counter);
 
-        // Decrease counter by 1
+        // Obniżam licznik o 1
         counter--;
 
-        // And swap the last element with it
+        // Zamieniam z nim ostatni element
         let temp = array[counter];
         array[counter] = array[index];
         array[index] = temp;
@@ -22,15 +22,16 @@ function shuffle(array) {
 const quizcont =
     [
         {
-            "id": 1,
-            "text": "W którym roku miała miejsce bitwa pod Poitiers?",
-            "answer": 732,
-            "penalty": 30,
-            "image": 'img/1.jpeg'
+            "id": 1, // numer pytania (gdyż w każdej rundzie będzie inna kol.)
+            "text": "W którym roku miała miejsce bitwa pod Poitiers?", //pytanie
+            "answer": 732, // poprawna odp.
+            "penalty": 30, // liczba doliczonych sekund
+            "image": 'img/1.jpeg' // adres ilustracji do pytania
         },
         {
             "id": 2,
-            "text": "W którym roku podpisano traktat z Verdun, skutkujący rozpadem państwa Franków?",
+            "text": "W którym roku podpisano traktat z Verdun, skutkujący\
+             rozpadem państwa Franków?",
             "answer": 843,
             "penalty": 30,
             "image": 'img/2.png'
@@ -111,8 +112,8 @@ const game = document.getElementById("game") as HTMLDivElement;
 const gamehead = document.getElementById("gamehead") as HTMLParagraphElement;
 const image = document.getElementById('image') as HTMLImageElement;
 const nick = document.getElementById('nick') as HTMLInputElement;
+const panel = document.querySelector('#panel') as HTMLDivElement;
 const penaltytext = document.getElementById("penaltytext") as HTMLParagraphElement;
-const questions = document.querySelector('#questions') as HTMLDivElement;
 const questiontext = document.getElementById("questiontext") as HTMLParagraphElement;
 const replies = document.getElementById("replies") as HTMLTableElement;
 const resetuj = document.querySelector('input[value="Resetuj"]') as HTMLInputElement;
@@ -126,8 +127,6 @@ const stopbut = document.querySelector('#stop') as HTMLInputElement;
 const tabela = document.getElementById('best') as HTMLTableElement;
 const timer = document.getElementById("timer") as HTMLParagraphElement;
 
-
-
 let answers = []; // tablica, do której zbieramy odpowiedzi użytkownika
 let times = []; // tablica, do której zbieramy spędzony czas
 let currentQuestion = 0; // miejsce aktualnego pyt. w tablicy (po potasowaniu)
@@ -137,6 +136,11 @@ game.style.display = 'none';
 score.style.display = 'none';
 
 let statJSON; // tutaj pobierzemy tabelę z listą wyników
+
+/*** BAZA DANYCH***/
+/* Baza danych zawiera jedną tabelę, w której jest jeden JSON-owy rekord.
+ * Jest ona potrzebna tylko do transakcji.
+ */
 
 let request = window.indexedDB.open("ReplyBase", 1), // otwieramy bazę
     db, // odwołanie do bazy danych
@@ -251,7 +255,7 @@ start.addEventListener('click', () => {
         times.push(0);
 
         // dodanie do panelu przycisków pytań
-        questions.innerHTML += `<div class='questionbutton' data-id='${i}'
+        panel.innerHTML += `<div class='questionbutton' data-id='${i}'
              onclick=loadPage(${i})><p>${i + 1}</p></div>\n`
         
         let quest = document.createElement('div');
@@ -341,11 +345,6 @@ start.addEventListener('click', () => {
                 });
 
             let ret = store.put({ qID: 1, questionText: [] });
-
-            ret.onsuccess = function (e) {
-                console.log("OK");
-            }
-
         };
 
         request.onsuccess = function (e) {
@@ -355,8 +354,6 @@ start.addEventListener('click', () => {
 
             let q1 = store.get(1);
             q1.onsuccess = function () {
-                console.log(q1.result)
-                console.log(q1.result.questionText);
                 let dzejson = q1.result.questionText;
 
                 // szukanie odpowiedniego miejsca w tabeli (bin-search)

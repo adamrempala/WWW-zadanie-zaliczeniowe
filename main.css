@@ -1,6 +1,6 @@
 body {
     width: auto;
-    background-image: url(http://www.4usky.com/data/out/67/164596106-old-wallpapers.jpg);
+    background-image: url(./img/background.jpg);
     font-family: 'MedievalSharp', cursive;
 }
 
@@ -138,7 +138,7 @@ img {
     margin-top: auto;
     margin-left: auto;
     margin-right: auto;
-    background-image: url(https://media.istockphoto.com/illustrations/red-stainedglass-3d-rendering-background-illustration-id673825944?k=6&m=673825944&s=612x612&w=0&h=bz_J3Ivrz5ZEy1lpjpshP_LqYpw1VpvMVpjRpr_5SyM=);
+    background-image: url(./img/ruby.jpg);
     position: relative;
     border-radius: 10%;
     border-style: solid;
@@ -188,10 +188,11 @@ img {
 #penaltytext {
     grid-area: penalty;
     text-align: center;
+    font-weight: 700;
     color: #700808;
 }
 
-#questions {
+#panel {
     margin: auto;
     grid-area: panel;
 }
@@ -202,25 +203,25 @@ img {
 
 #cancel {
     grid-area: cancel;
-    margin-right: 10px;
+    margin-right: auto;
     margin-left: auto;
 }
 
 #stop {
     grid-area: stop;
-    margin-left: 10px;
+    margin-left: auto;
     margin-right: auto;
 }
 
 #back {
     grid-area:bck;
-    margin-right: 10px;
+    margin-right: auto;
     margin-left: auto;
 }
 
 #forward {
     grid-area:fwd;
-    margin-left: 10px;
+    margin-left: auto;
     margin-right: auto;
 }
 
@@ -286,7 +287,7 @@ img {
     
 }
 
-.navbutton, .navbutton2 {
+.litnavbut, .bignavbut {
     height: 30px;
     width: 60px;
     margin: 5px;
@@ -297,7 +298,7 @@ img {
     font-family: 'MedievalSharp', cursive;
 }
 
-.navbutton2 {
+.bignavbut {
     width: 160px;
     margin-left: auto;
     margin-right: auto;
@@ -307,7 +308,7 @@ img {
     cursor: pointer;
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 1250px) {
     #start {
         width: 240px;
         height: 150px;
@@ -378,6 +379,88 @@ img {
         ". save . replies"
         ". savens . replies"
         ". dontsave . replies";
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 1250px) {
+    #description p {
+        font-size: 15px;
+    }
+
+    #image {
+        display:none;
+    }
+
+    #start {
+        margin-top: 0px;
+        grid-area:startbut;
+        width: 120px;
+        height: 75px;
+    }
+
+    #start p {
+        font-size: 20px;
+        color:white;
+    }
+
+    #stats {
+        text-align: center;
+        margin:auto;
+        margin-top: 20px;
+        grid-area:stats;
+    }
+
+    #startpage {
+        
+        width:75%;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+        grid-template-areas:
+        "startbut"
+        "stats";
+    } 
+
+    #timer {
+        grid-area: timer;
+        font-size: 28px;
+        margin-right: auto;
+        margin-left: 20px;
+    }
+
+    #game {
+        margin-top: 30px;
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 90%;
+        display: grid;
+
+        grid-template-columns: 10% 10% 40% 20% 10% 10%;
+        grid-template-rows: 50px 60px 40px 35px 115px;
+        grid-template-areas:
+        "header header header timer timer timer"
+        ". . question question . ."
+        "penalty penalty penalty penalty penalty penalty"
+        "cancel bck answer answer fwd stop"
+        "panel panel panel panel panel panel";
+    }
+
+    #score {
+        display: grid;
+        grid-template-columns: 30% 40% 30%;
+        grid-template-rows: 100px 50px 60px 30px 30px 30px auto;
+        grid-template-areas:
+        "seconds seconds seconds"
+        ". encourage ."
+        ". nick ."
+        ". save ."
+        ". savens ."
+        ". dontsave ."
+        "replies replies replies";
     }
 }
 
@@ -461,5 +544,24 @@ img {
         ". savens ."
         ". dontsave ."
         "replies replies replies";
+    }
+}
+
+@media screen and (max-width: 380px) {
+    #gamehead, #timer {
+        font-size: 18px;
+    }
+
+    #score {
+        display: grid;
+        grid-template-columns: 30% 40% 30%;
+        grid-template-rows: 100px 50px 60px 30px 30px 30px auto;
+        grid-template-areas:
+        "seconds seconds seconds"
+        ". encourage ."
+        ". nick ."
+        ". save ."
+        ". savens ."
+        ". dontsave ."
     }
 }
