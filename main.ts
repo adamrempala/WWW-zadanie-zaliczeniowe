@@ -256,7 +256,7 @@ start.addEventListener('click', () => {
 
         // dodanie do panelu przycisków pytań
         panel.innerHTML += `<div class='questionbutton' data-id='${i}'
-             onclick=loadPage(${i})><p>${i + 1}</p></div>\n`
+             onclick=loadPage(${i})><p>${i + 1}</p></div>\n`;
         
         let quest = document.createElement('div');
     }
@@ -400,8 +400,7 @@ start.addEventListener('click', () => {
     loadPage(0); // ładuję pierwsze pytanie
 
     // reaguję na kilknięcia i zmiany funkcją zapisującą
-    answer.addEventListener('keyup', saveAns);
-    answer.addEventListener('change', saveAns);
+    answer.addEventListener('input', saveAns);
 
     // koniec gry
     stopbut.addEventListener('click', () => {
@@ -460,8 +459,7 @@ start.addEventListener('click', () => {
         document.title = `Gra zakończona!`
 
         // teraz można zapisać wynik pod swoim nickiem
-        nick.addEventListener('change', checkNick);
-        nick.addEventListener('keyup', checkNick);
+        nick.addEventListener('input', checkNick);
 
         checkNick();
     });
