@@ -109,7 +109,7 @@ const back = document.getElementById("back") as HTMLButtonElement;
 const description = document.getElementById("description") as HTMLDivElement;
 const forward = document.getElementById("forward") as HTMLButtonElement;
 const game = document.getElementById("game") as HTMLDivElement;
-const gamehead = document.getElementById("gamehead") as HTMLParagraphElement;
+const gameheader = document.getElementById("gamehead") as HTMLParagraphElement;
 const image = document.getElementById('image') as HTMLImageElement;
 const nick = document.getElementById('nick') as HTMLInputElement;
 const panel = document.querySelector('#panel') as HTMLDivElement;
@@ -118,12 +118,12 @@ const questiontext = document.getElementById("questiontext") as HTMLParagraphEle
 const replies = document.getElementById("replies") as HTMLTableElement;
 const resetuj = document.querySelector('input[value="Resetuj"]') as HTMLInputElement;
 const save = document.getElementById("save") as HTMLParagraphElement;
-const savens = document.getElementById("savens") as HTMLParagraphElement;
+const savenostats = document.getElementById("savens") as HTMLParagraphElement;
 const score = document.getElementById("score") as HTMLDivElement;
 const seconds = document.getElementById("seconds") as HTMLParagraphElement;
 const start = document.getElementById("start") as HTMLDivElement;
 const startpage = document.getElementById("startpage") as HTMLDivElement;
-const stopbut = document.querySelector('#stop') as HTMLInputElement;
+const stopbutton = document.querySelector('#stop') as HTMLInputElement;
 const tabela = document.getElementById('best') as HTMLTableElement;
 const timer = document.getElementById("timer") as HTMLParagraphElement;
 
@@ -192,10 +192,10 @@ request.onsuccess = function (e) {
     }
 }
 
-// w przypadku nieutworzenia bazy danych, ponawiamy próbę
+// w przypadku nieutworzenia bazy danych, przekierowujemy na stronę błędu
 request.onerror = function (e) {
     indexedDB.deleteDatabase('ReplyBase');
-    location.reload();
+    location.href = "./error.html"
 }
 
 // ładowanie strony pytania (tryb gry)
@@ -203,7 +203,7 @@ function loadPage(pageNo) {
     currentQuestion = pageNo;
 
     // aktualizacja informacji dot. pytania
-    gamehead.innerHTML = `Pytanie nr ${pageNo + 1}`;
+    gameheader.innerHTML = `Pytanie nr ${pageNo + 1}`;
     questiontext.innerHTML = quiz[pageNo].text;
     penaltytext.innerHTML = `Błąd: +${quiz[pageNo].penalty} sekund`;
     image.setAttribute('src', `${quiz[pageNo].image}`);
@@ -238,12 +238,12 @@ start.addEventListener('click', () => {
     startpage.style.display = 'none';
 
     // ustawienie początkowe przycisku i tytułu
-    stopbut.setAttribute('disabled', 'disabled');
+    stopbutton.setAttribute('disabled', 'disabled');
     document.title = '11 pytań do końca'
 
     // ustawienie licznika, zmiennej przerwania, tablicy statystyk,
     let time = 0.0;
-    let ender = true;
+    let timeCountStoppingBool = true;
     let gamelog = {
         nick: "",
         time: 0.00,
@@ -271,16 +271,16 @@ start.addEventListener('click', () => {
         let j = 0;
 
         for (let i = 0; i != answers.length; i++) {
-            let but = document.querySelector(
+            let button = document.querySelector(
                 `.questionbutton[data-id='${i}']`
                 ) as HTMLDivElement;
 
             // przy okazji ustawia odpowiednie kolory w panelu
             if (answers[i].length < 1) {
                 j++;
-                but.style.backgroundColor = '#cccccc';
+                button.style.backgroundColor = '#cccccc';
             } else {
-                but.style.backgroundColor = 'orange';
+                button.style.backgroundColor = 'orange';
             }
         }
 
@@ -289,7 +289,7 @@ start.addEventListener('click', () => {
 
     // stoper (liczy do momentu, kiedy ustawimy zmienną przerwania na false)
     const countTime = async () => {
-        while (ender === true) {
+        while (timeCountStoppingBool === true) {
             timer.innerHTML = time.toFixed(1).toString();
             await sleep(100);
             time += 0.1;
@@ -304,12 +304,12 @@ start.addEventListener('click', () => {
         // przy okazji odpalam left
         if (left() == 0) {
             document.title = 'Możesz zatrzymać quiz'
-            stopbut.removeAttribute('disabled');
+            stopbutton.removeAttribute('disabled');
         }
 
         else {
             document.title = `${left()} pytań do końca`
-            stopbut.setAttribute('disabled', 'disabled');
+            stopbutton.setAttribute('disabled', 'disabled');
         }
 
 
@@ -320,11 +320,11 @@ start.addEventListener('click', () => {
 
         if (nick.value.length < 1) {
             save.setAttribute('disabled', 'disabled');
-            savens.setAttribute('disabled', 'disabled');
+            savenostats.setAttribute('disabled', 'disabled');
 
         } else {
             save.removeAttribute('disabled');
-            savens.removeAttribute('disabled');
+            savenostats.removeAttribute('disabled');
         }
 
     }
@@ -353,32 +353,32 @@ start.addEventListener('click', () => {
 
             let q1 = store.get(1);
             q1.onsuccess = function () {
-                let dzejson = q1.result.questionText;
+                let allScoresTable = q1.result.questionText;
 
                 // szukanie odpowiedniego miejsca w tabeli (bin-search)
-                let b = dzejson.length;
+                let b = allScoresTable.length;
                 let a = 0;
                 let s = a;
 
                 while (a !== b) {
                     s = Math.floor((b - a) / 2) + a;
-                    if (dzejson[s].time < gamelog.time) {
+                    if (allScoresTable[s].time < gamelog.time) {
                         a = s + 1;
                     } else {
                         b = s;
                     }
                 }
-                dzejson.splice(a, 0, gamelog);
+                allScoresTable.splice(a, 0, gamelog);
 
-                let gotit = store.put({ qID: 1, questionText: dzejson });
+                let hasBeenPutIntoBase = store.put({ qID: 1, questionText: allScoresTable });
 
                 // jeżeli zapis się uda, odświeżamy stronę
-                gotit.onsuccess = function (e) {
+                hasBeenPutIntoBase.onsuccess = function (e) {
                     location.reload();
                 }
 
                 // jeżeli nie, informujemy o tym
-                gotit.onerror = function (e) {
+                hasBeenPutIntoBase.onerror = function (e) {
                     alert("Saving failed, try again");
                 }
 
@@ -403,9 +403,9 @@ start.addEventListener('click', () => {
     answer.addEventListener('input', saveAns);
 
     // koniec gry
-    stopbut.addEventListener('click', () => {
+    stopbutton.addEventListener('click', () => {
 
-        ender = false; // czas stop
+        timeCountStoppingBool = false; // czas stop
 
         // uzupełnienie statystyk
         for (let i = 0; i < answers.length; i++) {
@@ -466,7 +466,7 @@ start.addEventListener('click', () => {
 
     save.addEventListener('click', statsToStorage);
 
-    savens.addEventListener('click', () => {
+    savenostats.addEventListener('click', () => {
         gamelog.stats = null; // jeżeli zapisujemy bez statystyk
         statsToStorage();
     })
